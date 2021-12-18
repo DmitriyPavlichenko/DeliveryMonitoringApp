@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Ordering} from "./ordering";
 
@@ -10,22 +10,31 @@ import {Ordering} from "./ordering";
 export class OrderingService {
   apiServerUrl = environment.apiBaseUrl;
 
-  constructor(private http: HttpClient) {
+  private httpOptions: { headers: HttpHeaders; } | undefined
+  public authorize(login: string | undefined, password: string | undefined) {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Basic ' + btoa(login + ':' + password)
+      })
+    };
   }
 
+  constructor(private http: HttpClient) { }
+
   public getOrdering(uuid: String): Observable<Ordering> {
-    return this.http.get<Ordering>(`${this.apiServerUrl}api/v1/warehouse/ordering/find?${uuid}`);
+    return this.http.get<Ordering>(`${this.apiServerUrl}api/v1/warehouse/ordering/find?${uuid}`, this.httpOptions);
   }
 
   public getOrderings(): Observable<Ordering[]> {
-    return this.http.get<Ordering[]>(`${this.apiServerUrl}api/v1/warehouse/ordering/findall`);
+    return this.http.get<Ordering[]>(`${this.apiServerUrl}api/v1/warehouse/ordering/findall`, this.httpOptions);
   }
 
   public addOrdering(employee: Ordering) {
-    this.http.post(`${this.apiServerUrl}api/v1/warehouse/ordering`, employee);
+    this.http.post(`${this.apiServerUrl}api/v1/warehouse/ordering`, employee, this.httpOptions);
   }
 
   public deleteOrdering(uuid: string) {
-    this.http.delete(`${this.apiServerUrl}api/v1/warehouse/ordering?${uuid}`)
+    this.http.delete(`${this.apiServerUrl}api/v1/warehouse/ordering?${uuid}`, this.httpOptions)
   }
 }

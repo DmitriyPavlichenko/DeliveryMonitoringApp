@@ -1,11 +1,11 @@
-enum ApplicationUserRole {
+enum EmployeeRole {
   WAREHOUSE_WORKER, PRODUCT_SUPPLIER, MANAGER, ADMINISTRATOR
 }
 
 export interface Employee {
-  id: number;
+  uuid: string;
   firstName: string;
   lastName: string;
-  role: ApplicationUserRole;
+  role: EmployeeRole;
   phoneNumber: string;
 }

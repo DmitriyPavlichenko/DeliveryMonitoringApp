@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Employee} from "./employee";
 import {HttpErrorResponse} from "@angular/common/http";
 import {EmployeeService} from "./employee.service";
@@ -8,7 +8,7 @@ import {EmployeeService} from "./employee.service";
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css']
 })
-export class EmployeeComponent {
+export class EmployeeComponent implements OnInit{
   public employees: Employee[] | undefined;
   login: string | undefined;
   password: string | undefined;
@@ -27,4 +27,7 @@ export class EmployeeComponent {
     );
   }
 
+  ngOnInit(): void {
+
+  }
 }

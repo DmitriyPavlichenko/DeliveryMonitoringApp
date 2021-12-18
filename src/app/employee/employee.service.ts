@@ -9,10 +9,8 @@ import {environment} from "../../environments/environment";
 })
 export class EmployeeService {
   private apiServerUrl = environment.apiBaseUrl;
+
   private httpOptions: { headers: HttpHeaders; } | undefined
-
-  constructor(private http: HttpClient) { }
-
   public authorize(login: string | undefined, password: string | undefined) {
     this.httpOptions = {
       headers: new HttpHeaders({
@@ -21,6 +19,8 @@ export class EmployeeService {
       })
     };
   }
+
+  constructor(private http: HttpClient) { }
 
   public getEmployee(phoneNumber: String): Observable<Employee> {
     return this.http.get<Employee>(`${this.apiServerUrl}api/v1/supply/employee/find?${phoneNumber}`, this.httpOptions);

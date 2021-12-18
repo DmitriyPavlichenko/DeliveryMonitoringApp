@@ -1,12 +1,9 @@
-import {Employee} from "../employee/employee";
-import {Department} from "../department/department";
-import {Product} from "../product/product";
+import {ProductUnit} from "../product/productuint";
 
 export interface Ordering {
-  id: number;
   uuid: string;
-  products: Product[];
-  employee: Employee;
-  department: Department;
+  productUnitList: ProductUnit[];
+  employeeUuid: string;
+  departmentUuid: string;
   date: Date;
 }
