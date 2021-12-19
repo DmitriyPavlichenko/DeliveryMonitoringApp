@@ -22,6 +22,9 @@
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
+  "engines": {
+    "npm": "2.1.x"
+  },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.0.2",
     "@angular/cli": "~13.0.2",
