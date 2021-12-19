@@ -5,5 +5,4 @@ export interface Ordering {
   productUnitList: ProductUnit[];
   employeeUuid: string;
   departmentUuid: string;
-  date: Date;
 }
