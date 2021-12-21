@@ -1,22 +1,25 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from "@angular/router";
-import {DepartmentComponent} from "./department/department.component";
-import {EmployeeComponent} from "./employee/employee.component";
-import {ProductComponent} from "./product/product.component";
-import {OrderingComponent} from "./ordering/ordering.component";
-import {RegistrationComponent} from "./registration/registration.component";
-import {IndexComponent} from "./index/index.component";
-import {LoginComponent} from "./login/login.component";
+import {Routes, RouterModule} from '@angular/router';
+
+import {HomeComponent} from './home';
+import {LoginComponent} from './login';
+import {AuthGuard} from './authorization/_helpers';
+import {RegistrationComponent} from "@app/registration/registration.component";
+import {OrderingComponent} from "@app/ordering/ordering.component";
+import {ProductComponent} from "@app/product/product.component";
+import {EmployeeComponent} from "@app/employee/employee.component";
+import {DepartmentComponent} from "@app/department/department.component";
 
 const routes: Routes = [
-  {path: '', component: IndexComponent},
+  {path: '', component: HomeComponent, canActivate: [AuthGuard]},
+  {path: 'login', component: LoginComponent},
   {path: 'department', component: DepartmentComponent},
   {path: 'employee', component: EmployeeComponent},
   {path: 'product', component: ProductComponent},
   {path: 'ordering', component: OrderingComponent},
   {path: 'registration', component: RegistrationComponent},
-  {path: 'login', component: LoginComponent},
 
+  // otherwise redirect to home
   {path: '**', redirectTo: ''}
 ];
 
@@ -26,5 +29,3 @@ const routes: Routes = [
 })
 export class AppRoutingModule {
 }
-
-export const routingComponents = [DepartmentComponent, EmployeeComponent, ProductComponent, OrderingComponent, RegistrationComponent, IndexComponent, LoginComponent]

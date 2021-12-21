@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Employee} from "./employee";
 import {HttpErrorResponse} from "@angular/common/http";
 import {EmployeeService} from "./employee.service";
+import {User} from "@app/authorization/_models";
 
 @Component({
   selector: 'app-employee',
@@ -10,13 +11,12 @@ import {EmployeeService} from "./employee.service";
 })
 export class EmployeeComponent implements OnInit{
   public employees: Employee[] | undefined;
-  login: string | undefined;
-  password: string | undefined;
+  @Input() user: User;
 
   constructor(private employeeService: EmployeeService) { }
 
   public getEmployees(): void {
-    this.employeeService.authorize(this.login, this.password)
+    this.employeeService.authorize(this.user)
     this.employeeService.getEmployees().subscribe(
       (response: Employee[]) => {
         this.employees = response;

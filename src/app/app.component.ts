@@ -1,32 +1,21 @@
-import {Component, OnInit} from '@angular/core';
-import {Employee} from "./employee/employee";
-import {EmployeeService} from "./employee/employee.service";
-import {HttpErrorResponse} from "@angular/common/http";
-import {DepartmentService} from "./department/department.service";
-import {Department} from "./department/department";
-
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
-export class AppComponent{
-  title = 'DeliveryMonitoringApp';
-  public employees: Employee[] | undefined;
-  public departments: Department[] | undefined;
-
-  constructor(private employeeService: EmployeeService, private departmentService: DepartmentService) { }
+﻿import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {User} from '@app/authorization/_models';
+import {AuthenticationService} from '@app/authorization/_services';
 
 
+@Component({selector: 'app', templateUrl: 'app.component.html'})
+export class AppComponent {
+  user: User;
 
-  public getDepartments(): void {
-    this.departmentService.getDepartments().subscribe(
-      (response: Department[]) => {
-        this.departments = response;
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {
+    this.authenticationService.user.subscribe(x => this.user = x);
+  }
+
+  logout() {
+    this.authenticationService.logout();
   }
 }

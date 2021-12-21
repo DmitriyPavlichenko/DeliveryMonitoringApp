@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
-  apiBaseUrl: 'https://delmon.herokuapp.com/'
+    production: true,
+    apiUrl: 'http://localhost:4000'
 };

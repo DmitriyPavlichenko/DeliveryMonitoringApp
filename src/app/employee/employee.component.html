@@ -3,14 +3,8 @@
 </div>
 
 <form id="accesspanel" action="">
-  <div class="inset">
-    <p>
-      <input type="text" name="username" [(ngModel)]="login" id="email" placeholder="username">
-    </p>
-    <p>
-      <input type="password" name="password" [(ngModel)]="password" id="password" placeholder="password">
-    </p>
-  </div>
+  <div>{{user.username}}</div>
+  <div>{{user.password}}</div>
   <div class="p-container">
     <input type="submit" (click)="getEmployees()">
     <div *ngFor="let employee of employees">
