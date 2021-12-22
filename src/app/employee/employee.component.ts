@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Employee} from "./employee";
 import {HttpErrorResponse} from "@angular/common/http";
 import {EmployeeService} from "./employee.service";
 import {User} from "@app/authorization/_models";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-employee',
@@ -10,8 +11,6 @@ import {User} from "@app/authorization/_models";
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent implements OnInit{
-  @Input() user: User;
-
   constructor(private employeeService: EmployeeService) { }
 
   employee: Employee;
@@ -48,6 +47,6 @@ export class EmployeeComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.employeeService.authorize(this.user)
+    this.employeeService.authorize((new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')))).value)
   }
 }

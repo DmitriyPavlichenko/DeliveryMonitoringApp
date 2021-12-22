@@ -19,7 +19,4 @@ export class AppComponent {
     this.authenticationService.logout();
   }
 
-  warehouse() {
-
-  }
 }

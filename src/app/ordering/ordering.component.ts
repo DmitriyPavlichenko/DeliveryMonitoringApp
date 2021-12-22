@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from "@app/authorization/_models";
 import {OrderingService} from "@app/ordering/ordering.service";
 import {Ordering} from "@app/ordering/ordering";
 import {HttpErrorResponse} from "@angular/common/http";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-ordering',
@@ -10,8 +11,6 @@ import {HttpErrorResponse} from "@angular/common/http";
   styleUrls: ['./ordering.component.css']
 })
 export class OrderingComponent implements OnInit {
-  @Input() user: User;
-
   constructor(private orderingService: OrderingService) { }
 
   ordering: Ordering;
@@ -48,6 +47,6 @@ export class OrderingComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.orderingService.authorize(this.user)
+    this.orderingService.authorize((new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')))).value)
   }
 }

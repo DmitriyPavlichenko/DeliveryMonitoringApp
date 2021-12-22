@@ -1,7 +1,8 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 import {User} from "@app/authorization/_models";
 import {RegistrationService} from "@app/registration/registration.service";
 import {AppUser} from "@app/registration/appUser";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-registration',
@@ -9,8 +10,6 @@ import {AppUser} from "@app/registration/appUser";
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
-  @Input() user: User;
-
   constructor(private registrationService: RegistrationService) { }
 
 
@@ -24,6 +23,6 @@ export class RegistrationComponent {
 
 
   ngOnInit(): void {
-    this.registrationService.authorize(this.user)
+    this.registrationService.authorize((new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')))).value)
   }
 }

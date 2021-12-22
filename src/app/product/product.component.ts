@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from "@app/authorization/_models";
 import {Product} from "@app/product/product";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ProductService} from "@app/product/product.service";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-product',
@@ -10,8 +11,6 @@ import {ProductService} from "@app/product/product.service";
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  @Input() user: User;
-
   constructor(private productService: ProductService) { }
 
   product: Product;
@@ -48,6 +47,6 @@ export class ProductComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.productService.authorize(this.user)
+    this.productService.authorize((new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')))).value)
   }
 }

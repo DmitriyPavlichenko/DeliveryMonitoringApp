@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from "@app/authorization/_models";
 import {Department} from "@app/department/department";
 import {DepartmentService} from "@app/department/department.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-department',
@@ -10,8 +11,6 @@ import {HttpErrorResponse} from "@angular/common/http";
   styleUrls: ['./department.component.css']
 })
 export class DepartmentComponent implements OnInit {
-  @Input() user: User;
-
   constructor(private departmentService: DepartmentService) { }
 
   department: Department;
@@ -47,7 +46,7 @@ export class DepartmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.departmentService.authorize(this.user);
+    this.departmentService.authorize((new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')))).value);
   }
 
 }
