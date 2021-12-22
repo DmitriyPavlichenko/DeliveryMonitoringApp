@@ -14,32 +14,28 @@ export class EmployeeComponent implements OnInit{
 
   constructor(private employeeService: EmployeeService) { }
 
-  public getEmployee(phoneNumber: string): Employee {
-    let employee: Employee;
+  employee: Employee;
+  public getEmployee(phoneNumber: string): void {
     this.employeeService.getEmployee(phoneNumber).subscribe(
       (response: Employee) => {
-        employee = response;
+        this.employee = response;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
     );
-
-    return employee;
   }
 
-  public getEmployees(): Employee[] {
-    let employees: Employee[];
+  employees: Employee[];
+  public getEmployees(): void {
     this.employeeService.getEmployees().subscribe(
       (response: Employee[]) => {
-        employees = response;
+        this.employees = response;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
     );
-
-    return employees;
   }
 
   public addEmployee(employee: Employee): void {

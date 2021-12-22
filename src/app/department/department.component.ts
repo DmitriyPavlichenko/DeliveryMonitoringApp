@@ -14,32 +14,28 @@ export class DepartmentComponent implements OnInit {
 
   constructor(private departmentService: DepartmentService) { }
 
-  public getDepartment(address: string): Department {
-    let department: Department;
+  department: Department;
+  public getDepartment(address: string): void {
     this.departmentService.getDepartment(address).subscribe(
       (response: Department) => {
-        department = response;
+        this.department = response;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
     );
-
-    return department;
   }
 
-  public getDepartments(): Department[] {
-    let departments: Department[];
+  departments: Department[];
+  public getDepartments(): void {
     this.departmentService.getDepartments().subscribe(
       (response: Department[]) => {
-        departments = response;
+        this.departments = response;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
     );
-
-    return departments;
   }
 
   public saveDepartment(department: Department): void {

@@ -14,32 +14,28 @@ export class ProductComponent implements OnInit {
 
   constructor(private productService: ProductService) { }
 
-  public getProduct(name: string): Product {
-    let product: Product;
+  product: Product;
+  public getProduct(name: string): void {
     this.productService.getProduct(name).subscribe(
       (response: Product) => {
-        product = response;
+        this.product = response;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
     );
-
-    return product;
   }
 
-  public getProducts(): Product[] {
-    let products: Product[];
+  products: Product[];
+  public getProducts(): void {
     this.productService.getProducts().subscribe(
       (response: Product[]) => {
-        products = response;
+        this.products = response;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
     );
-
-    return products;
   }
 
   public addProduct(product: Product): void {
