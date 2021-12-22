@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loading = true;
+    this.loading = false;
     /*
     some stuff
     */
