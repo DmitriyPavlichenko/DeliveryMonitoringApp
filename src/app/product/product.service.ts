@@ -31,7 +31,7 @@ export class ProductService {
     return this.http.get<Product[]>(`${this.apiServerUrl}/api/v1/supply/product/findall`, this.httpOptions);
   }
 
-  public addProducts(product: Product) {
+  public addProduct(product: Product) {
     this.http.post(`${this.apiServerUrl}/api/v1/supply/product`, product, this.httpOptions);
   }
 

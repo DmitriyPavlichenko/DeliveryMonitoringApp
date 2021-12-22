@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {User} from "@app/authorization/_models";
+import {RegistrationService} from "@app/registration/registration.service";
+import {AppUser} from "@app/registration/appUser";
 
 @Component({
   selector: 'app-registration',
@@ -6,9 +9,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
+  @Input() user: User;
 
-  login: string | undefined;
-  password: string | undefined;
+  constructor(private registrationService: RegistrationService) { }
 
-  constructor() { }
+
+  public registerUser(user: AppUser): void {
+    this.registrationService.registerUser(user);
+  }
+
+  public deleteUser(uuid: string): void {
+    this.registrationService.deleteUser(uuid);
+  }
+
+
+  ngOnInit(): void {
+    this.registrationService.authorize(this.user)
+  }
 }

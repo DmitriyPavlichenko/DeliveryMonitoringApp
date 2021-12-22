@@ -27,7 +27,7 @@ export class RegistrationService {
     this.http.post(`${this.apiServerUrl}/api/v1/registration`, user, this.httpOptions);
   }
 
-  public deleteUser(id: number) {
-    this.http.delete(`${this.apiServerUrl}/api/v1/registration${id}`, this.httpOptions)
+  public deleteUser(uuid: string) {
+    this.http.delete(`${this.apiServerUrl}/api/v1/registration${uuid}`, this.httpOptions)
   }
 }

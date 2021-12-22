@@ -10,24 +10,48 @@ import {User} from "@app/authorization/_models";
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent implements OnInit{
-  public employees: Employee[] | undefined;
   @Input() user: User;
 
   constructor(private employeeService: EmployeeService) { }
 
-  public getEmployees(): void {
-    this.employeeService.authorize(this.user)
-    this.employeeService.getEmployees().subscribe(
-      (response: Employee[]) => {
-        this.employees = response;
+  public getEmployee(phoneNumber: string): Employee {
+    let employee: Employee;
+    this.employeeService.getEmployee(phoneNumber).subscribe(
+      (response: Employee) => {
+        employee = response;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
     );
+
+    return employee;
   }
 
-  ngOnInit(): void {
+  public getEmployees(): Employee[] {
+    let employees: Employee[];
+    this.employeeService.getEmployees().subscribe(
+      (response: Employee[]) => {
+        employees = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
 
+    return employees;
+  }
+
+  public addEmployee(employee: Employee): void {
+    this.employeeService.addEmployee(employee);
+  }
+
+  public deleteEmployee(phoneNumber: string): void {
+    this.employeeService.deleteEmployee(phoneNumber);
+  }
+
+
+  ngOnInit(): void {
+    this.employeeService.authorize(this.user)
   }
 }
