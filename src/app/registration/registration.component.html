@@ -1,1 +1,45 @@
-<p>registration works!</p>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container login-container">
+  <div class="row">
+    <div class="col-md-6 login-form-1">
+      <h2>Register</h2>
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <p>Form value: {{ f.value | json }}</p>
+        <p>Form valid: {{ f.valid }}</p>
+        <div class="form-group">
+          <div class="form-group">
+            <input type="text" name="firstname" ngModel required #firstname="ngModel"
+                   class="form-control" placeholder="Your name *" value="" />
+            <p>Firstname value: {{ firstname.value }}</p>
+
+          </div>
+          <input type="text" name="username" ngModel required #username="ngModel"
+                 class="form-control" placeholder="Your Email *" value="" />
+          <p>Username value: {{ username.value }}</p>
+
+        </div>
+        <div class="form-group">
+          <input type="password" name="Phone number" ngModel required #password="ngModel"
+                 class="form-control" placeholder="Your Phone number *" value="" />
+          <p>Password value: {{ password.value }}</p>
+
+        </div>
+
+        <div class="form-group">
+          <input type="password" name="password" ngModel required #password="ngModel"
+                 class="form-control" placeholder="Repeat Password *" value="" />
+          <p>Password value: {{ password.value }}</p>
+
+        </div>
+
+
+        <div class="form-group">
+          <input type="submit" [disabled]="f.invalid"
+                 class="btnSubmit" value="Register" />
+        </div>
+      </form>
+    </div>
