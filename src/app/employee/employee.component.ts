@@ -12,6 +12,7 @@ import {RequestEmployee} from "@app/employee/requestEmployee";
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent implements OnInit{
+  user: User = (new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')))).value;
   constructor(private employeeService: EmployeeService) { }
 
   employee: ResponseEmployee;
@@ -59,7 +60,7 @@ export class EmployeeComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.employeeService.authorize((new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')))).value);
+    this.employeeService.authorize(this.user);
     this.getEmployees();
   }
 }

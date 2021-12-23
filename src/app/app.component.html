@@ -3,12 +3,17 @@
   <div class="navbar-nav">
     <a class="nav-item nav-link" routerLink="/">Home</a>
     <a class="nav-item nav-link" (click)="logout()">Logout</a>
-    <a class="nav-item nav-link" [routerLink]="['/registration']" routerLinkActive="$router_link-active$">Register</a>
+      <a class="nav-item nav-link" *ngIf="hasAccess(['ADMINISTRATOR'])"
+         [routerLink]="['/registration']" routerLinkActive="$router_link-active$">Register</a>
     <div class="navbar-nav" style="margin-left: 15%">
-      <a class="nav-item nav-link" [routerLink]="['/employee']" routerLinkActive="$router_link-active$">Employees</a>
-      <a class="nav-item nav-link" [routerLink]="['/product']" routerLinkActive="$router_link-active$">Products</a>
-      <a class="nav-item nav-link" [routerLink]="['/department']" routerLinkActive="$router_link-active$">Departments</a>
-      <a class="nav-item nav-link" [routerLink]="['/ordering']" routerLinkActive="$router_link-active$">Orderings</a>
+      <a class="nav-item nav-link" *ngIf="hasAccess(['ADMINISTRATOR', 'MANAGER'])"
+         [routerLink]="['/employee']" routerLinkActive="$router_link-active$">Employees</a>
+      <a class="nav-item nav-link" *ngIf="hasAccess(['ADMINISTRATOR', 'PRODUCT_SUPPLIER'])"
+         [routerLink]="['/product']" routerLinkActive="$router_link-active$">Products</a>
+      <a class="nav-item nav-link" *ngIf="hasAccess(['ADMINISTRATOR', 'MANAGER'])"
+         [routerLink]="['/department']" routerLinkActive="$router_link-active$">Departments</a>
+      <a class="nav-item nav-link" *ngIf="hasAccess(['ADMINISTRATOR', 'WAREHOUSE_WORKER'])"
+         [routerLink]="['/ordering']" routerLinkActive="$router_link-active$">Orderings</a>
     </div>
   </div>
 </nav>

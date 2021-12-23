@@ -19,4 +19,12 @@ export class AppComponent {
     this.authenticationService.logout();
   }
 
+  hasAccess(requiredRoles: string[]): boolean {
+    for (let role of requiredRoles) {
+      if (this.user.employeeRole == role) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

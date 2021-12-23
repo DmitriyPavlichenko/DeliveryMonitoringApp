@@ -1,6 +1,12 @@
-﻿export class User {
+﻿import {EmployeeRole} from "@app/employee/responseEmployee";
+
+export class User {
   username: string;
   password: string;
-  isAuthenticated: boolean;
+  firstName: string;
+  lastName: string;
+  employeeRole: EmployeeRole;
+  locked: boolean;
+  enabled: boolean;
   authdata?: string;
 }
