@@ -10,12 +10,12 @@
     <div class="nvbr d-flex p-2 justify-content-between bg-secondary">
       <h2 class="text-light">Product list</h2>
       <div class="buttons d-flex align-center">
-        <a href="#addProductModal" class="btn btn-success mr-1"><i class="fa fa-plus-square"></i> Add Product</a>
+        <button class="btn btn-success mr-1"><i class="fa fa-plus-square"></i> Add Product</button>
         <button type="button" class="btn btn-primary p-1" (click)="printReport()"><i class="fa fa-print"></i> PrintReport</button>
 
       </div>
     </div>
-    <table id="products">
+    <table id="products" class="table table-dark">
       <thead>
       <tr>
         <th scope="col">#</th>
