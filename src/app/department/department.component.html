@@ -2,34 +2,53 @@
   <div class="background"></div>
 </div>
 
-  <div class="p-container">
-    <!--    <input type="submit" (click)="getEmployees()">-->
+<div class="p-container">
+  <!--    <input type="submit" (click)="getEmployees()">-->
 
-    <div class="nvbr d-flex p-2 justify-content-between bg-secondary">
-      <h2 class="text-light">Department list</h2>
-      <div class="buttons d-flex align-center">
-        <button class="btn btn-success mr-1"><i class="fa fa-plus-square"></i> Add Department</button>
-        <button type="button" class="btn btn-primary mr-1"><i class="fa fa-print"></i> PrintReport</button>
-<!--        <button type="button" class="btn btn-primary mr-1" (click)="printReport()"><i class="fa fa-print"></i> PrintReport</button>-->
+  <div class="nvbr d-flex p-2 justify-content-between bg-secondary">
+    <h2 class="text-light">Department list</h2>
+    <div class="buttons d-flex align-center">
+      <button class="btn btn-success mr-1"><i class="fa fa-plus-square"></i> Find Department</button>
+      <button type="button" class="btn btn-primary mr-1"><i class="fa fa-print"></i> PrintReport</button>
+      <!--        <button type="button" class="btn btn-primary mr-1" (click)="printReport()"><i class="fa fa-print"></i> PrintReport</button>-->
 
-      </div>
     </div>
+  </div>
 
-    <table id="#departments" class="table table-dark">
-      <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Address</th>
-        <th scope="col">Action</th>
+  <table id="#departments" class="table table-dark">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Address</th>
+      <th scope="col">Action</th>
 
-      </tr>
-      </thead>
-      <tbody *ngFor="let department of departments">
-      <tr>
-        <th scope="row">{{department.uuid}}</th>
-        <td>{{department.address}}</td>
-        <td><a><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-      </tr>
+    </tr>
+    </thead>
+    <tbody *ngFor="let department of responseDepartments">
+    <tr>
+      <th scope="row">{{department.uuid}}</th>
+      <td>{{department.address}}</td>
+      <td><a><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+    </tr>
+    </tbody>
+  </table>
 
-      </tbody>
-    </table>
+  <!--  adding example-->
+  <input type="text" #findingAddress="ngModel" ngModel=""
+         name="key" id="find" placeholder="Find department by address" required>
+  <button (click)="getDepartment(findingAddress.value)"><i></i> Find Department</button>
+  <div>
+    <!--<div>{{responseDepartment.address}}</div>
+    <div>{{responseDepartment.uuid}}</div>-->
+  </div>
+
+<!--  adding example-->
+  <input type="text" #addingAddress="ngModel" ngModel=""
+         name="key" id="add" placeholder="Add new department" required>
+  <button (click)="saveDepartment(addingAddress.value)"><i></i> Add Department</button>
+
+<!--  deleting example-->
+  <input type="text" #deletingAddress="ngModel" ngModel=""
+         name="key" id="delete" placeholder="Delete department" required>
+  <button (click)="deleteDepartment(deletingAddress.value)"><i></i> Delete Department</button>
+</div>

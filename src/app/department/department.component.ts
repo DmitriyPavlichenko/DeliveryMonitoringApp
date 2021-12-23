@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from "@app/authorization/_models";
-import {Department} from "@app/department/department";
+import {ResponseDepartment} from "@app/department/ResponseDepartment";
 import {DepartmentService} from "@app/department/department.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {BehaviorSubject} from "rxjs";
+import {RequestDepartment} from "@app/department/RequestDepartment";
 
 @Component({
   selector: 'app-department',
@@ -13,11 +14,11 @@ import {BehaviorSubject} from "rxjs";
 export class DepartmentComponent implements OnInit {
   constructor(private departmentService: DepartmentService) { }
 
-  department: Department;
+  responseDepartment: ResponseDepartment;
   public getDepartment(address: string): void {
     this.departmentService.getDepartment(address).subscribe(
-      (response: Department) => {
-        this.department = response;
+      (response: ResponseDepartment) => {
+        this.responseDepartment = response;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -25,11 +26,11 @@ export class DepartmentComponent implements OnInit {
     );
   }
 
-  departments: Department[];
+  responseDepartments: ResponseDepartment[];
   public getDepartments(): void {
     this.departmentService.getDepartments().subscribe(
-      (response: Department[]) => {
-        this.departments = response;
+      (response: ResponseDepartment[]) => {
+        this.responseDepartments = response;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -37,12 +38,23 @@ export class DepartmentComponent implements OnInit {
     );
   }
 
-  public saveDepartment(department: Department): void {
-    this.departmentService.addDepartment(department);
+  public saveDepartment(address: string): void {
+    let department: RequestDepartment = new RequestDepartment(address)
+    this.departmentService.addDepartment(department).subscribe(
+      null,
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 
   public deleteDepartment(address: string): void {
-    this.departmentService.deleteDepartment(address);
+    this.departmentService.deleteDepartment(address).subscribe(
+      null,
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 
   ngOnInit(): void {
