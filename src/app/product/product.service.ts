@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {environment} from "@environments/environment";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Product} from "./product";
+import {ResponseProduct} from "./responseProduct";
 import {Observable} from "rxjs";
 import {User} from "@app/authorization/_models";
+import {RequestProduct} from "@app/product/requestProduct";
 
 @Injectable({
   providedIn: 'root'
@@ -23,19 +24,19 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  public getProduct(name: String): Observable<Product> {
-    return this.http.get<Product>(`${this.apiServerUrl}/api/v1/supply/product/find?${name}`, this.httpOptions);
+  public getProduct(name: String): Observable<ResponseProduct> {
+    return this.http.get<ResponseProduct>(`${this.apiServerUrl}/api/v1/supply/product/find?name=${name}`, this.httpOptions);
   }
 
-  public getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiServerUrl}/api/v1/supply/product/findall`, this.httpOptions);
+  public getProducts(): Observable<ResponseProduct[]> {
+    return this.http.get<ResponseProduct[]>(`${this.apiServerUrl}/api/v1/supply/product/findall`, this.httpOptions);
   }
 
-  public addProduct(product: Product) {
-    this.http.post(`${this.apiServerUrl}/api/v1/supply/product`, product, this.httpOptions);
+  public addProduct(product: RequestProduct): Observable<any> {
+    return this.http.post(`${this.apiServerUrl}/api/v1/supply/product`, product, this.httpOptions);
   }
 
-  public deleteProduct(name: string) {
-    this.http.delete(`${this.apiServerUrl}/api/v1/supply/product?${name}`, this.httpOptions)
+  public deleteProduct(name: string): Observable<any> {
+    return this.http.delete(`${this.apiServerUrl}/api/v1/supply/product?name=${name}`, this.httpOptions)
   }
 }

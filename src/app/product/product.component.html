@@ -36,3 +36,24 @@
     </table>
   </div>
 </form>
+
+<!--  finding example-->
+<input type="text" #findingName="ngModel" ngModel=""
+       name="key" id="find" placeholder="Find product" required>
+<button (click)="getProduct(findingName.value)"><i></i> Find product</button>
+<div>
+  <!--<div>{{responseDepartment.address}}</div>
+  <div>{{responseDepartment.uuid}}</div>-->
+</div>
+
+<!--  adding example-->
+<input type="text" #addingName="ngModel" ngModel=""
+       name="key" id="name" placeholder="name" required>
+<input type="text" #addingPrice="ngModel" ngModel=""
+       name="key" id="price" placeholder="price" required>
+<button (click)="saveProduct(addingName.value, addingPrice.value)"><i></i> Add product</button>
+
+<!--  deleting example-->
+<input type="text" #deletingName="ngModel" ngModel=""
+       name="key" id="delete" placeholder="Delete department" required>
+<button (click)="deleteProduct(deletingName.value)"><i></i> Delete product</button>

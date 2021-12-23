@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from "@app/authorization/_models";
-import {Product} from "@app/product/product";
+import {ResponseProduct} from "@app/product/responseProduct";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ProductService} from "@app/product/product.service";
 import {BehaviorSubject} from "rxjs";
+import {RequestProduct} from "@app/product/requestProduct";
 
 @Component({
   selector: 'app-product',
@@ -13,10 +14,10 @@ import {BehaviorSubject} from "rxjs";
 export class ProductComponent implements OnInit {
   constructor(private productService: ProductService) { }
 
-  product: Product;
+  product: ResponseProduct;
   public getProduct(name: string): void {
     this.productService.getProduct(name).subscribe(
-      (response: Product) => {
+      (response: ResponseProduct) => {
         this.product = response;
       },
       (error: HttpErrorResponse) => {
@@ -25,10 +26,10 @@ export class ProductComponent implements OnInit {
     );
   }
 
-  products: Product[];
+  products: ResponseProduct[];
   public getProducts(): void {
     this.productService.getProducts().subscribe(
-      (response: Product[]) => {
+      (response: ResponseProduct[]) => {
         this.products = response;
       },
       (error: HttpErrorResponse) => {
@@ -37,12 +38,23 @@ export class ProductComponent implements OnInit {
     );
   }
 
-  public addProduct(product: Product): void {
-    this.productService.addProduct(product);
+  public saveProduct(name: string, price: number): void {
+    let product: RequestProduct = new RequestProduct(name, price);
+    this.productService.addProduct(product).subscribe(
+      null,
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 
   public deleteProduct(name: string): void {
-    this.productService.deleteProduct(name);
+    this.productService.deleteProduct(name).subscribe(
+      null,
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 
 
