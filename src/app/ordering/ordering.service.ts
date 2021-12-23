@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {RequestOrdering} from "./requestOrdering";
 import {User} from "@app/authorization/_models";
-import {ResponseOrdering} from "@app/ordering/ResponseOrdering";
+import {ResponseOrdering} from "@app/ordering/responseOrdering";
 
 @Injectable({
   providedIn: 'root'
@@ -25,18 +25,18 @@ export class OrderingService {
   constructor(private http: HttpClient) { }
 
   public getOrdering(uuid: String): Observable<ResponseOrdering> {
-    return this.http.get<ResponseOrdering>(`${this.apiServerUrl}/api/v1/warehouse/ordering/find?${uuid}`, this.httpOptions);
+    return this.http.get<ResponseOrdering>(`${this.apiServerUrl}/api/v1/warehouse/ordering/find?uuid=${uuid}`, this.httpOptions);
   }
 
   public getOrderings(): Observable<ResponseOrdering[]> {
     return this.http.get<ResponseOrdering[]>(`${this.apiServerUrl}/api/v1/warehouse/ordering/findall`, this.httpOptions);
   }
 
-  public addOrdering(employee: RequestOrdering) {
-    this.http.post(`${this.apiServerUrl}/api/v1/warehouse/ordering`, employee, this.httpOptions);
+  public addOrdering(employee: RequestOrdering): Observable<any> {
+    return this.http.post(`${this.apiServerUrl}/api/v1/warehouse/ordering`, employee, this.httpOptions);
   }
 
-  public deleteOrdering(uuid: string) {
-    this.http.delete(`${this.apiServerUrl}/api/v1/warehouse/ordering?${uuid}`, this.httpOptions)
+  public deleteOrdering(uuid: string): Observable<any> {
+    return this.http.delete(`${this.apiServerUrl}/api/v1/warehouse/ordering?uuid=${uuid}`, this.httpOptions)
   }
 }
