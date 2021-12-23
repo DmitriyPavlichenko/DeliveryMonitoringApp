@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {RegistrationService} from "@app/registration/registration.service";
 
 @Component({
   selector: 'app-registration',
@@ -10,9 +11,12 @@ export class RegistrationComponent {
   login: string | undefined;
   password: string | undefined;
 
-  constructor() { }
+  constructor(private registrationService: RegistrationService) { }
 
   onSubmit(f: any) {
-    console.log('wowkr')
+    console.log('works')
   }
+   // public createUser(uuid, password) {
+   //    this.registrationService.registerUser()
+   // }
 }

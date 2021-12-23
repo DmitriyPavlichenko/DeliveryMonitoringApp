@@ -2,7 +2,6 @@
   <div class="background"></div>
 </div>
 
-<form id="accesspanel" action="">
   <div class="p-container">
     <!--    <input type="submit" (click)="getEmployees()">-->
 
@@ -15,39 +14,33 @@
 
       </div>
     </div>
-
-    <!--<table id="#orderings" class="table table-dark">
+  </div>
+    <table id="#orderings" class="table table-dark">
       <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Product</th>
-        <th scope="col">Quantity</th>
+        <th scope="col">Product Name</th>
         <th scope="col">Employee</th>
+        <th scope="col">Product Quantity</th>
         <th scope="col">Department</th>
+        <th scope="col">Action</th>
 
       </tr>
       </thead>
-      <tbody>
-      <tr *ngFor="let ordering of orderings">
+      <tbody *ngFor="let ordering of orderings">
+      <tr>
         <td>{{ordering.uuid}}</td>
-        <tr *ngFor="let productUnit of ordering.productUnitList">
-          <th>{{productUnit.product.name}}</th>
-          <th>{{productUnit.quantity}}</th>
-        </tr>
-      <td>{{ordering.uuid}}</td>
-      </tr>
+        <span *ngFor="let productUnit of ordering.productUnitList">
+          <td>{{productUnit.product.name}}</td>
+        </span>
+        <td>{{ordering.employee.firstName}}</td>
+        <span *ngFor="let productUnit of ordering.productUnitList">
+          <td>{{productUnit.quantity}}</td>
+        </span>
+        <td>{{ordering.department.address}}</td>
 
+      <td><a><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+      </tr>
       </tbody>
-    </table>-->
-    <div *ngFor="let ordering of orderings">
-      <div>{{ordering.uuid}}</div>
-      <div *ngFor="let productUnit of ordering.productUnitList">
-        <div>{{productUnit.uuid}}</div>
-        <div>{{productUnit.product.name}}</div>
-        <div>{{productUnit.quantity}}</div>
-      </div>
-      <div>{{ordering.department.address}}</div>
-      <div>{{ordering.employee.firstName}}</div>
-    </div>
-  </div>
-</form>
+    </table>
+
