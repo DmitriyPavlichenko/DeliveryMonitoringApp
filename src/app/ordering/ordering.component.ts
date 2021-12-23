@@ -11,7 +11,7 @@ import {EmployeeService} from "@app/employee/employee.service";
 import {ResponseEmployee} from "@app/employee/responseEmployee";
 import {ProductService} from "@app/product/product.service";
 import {ResponseProduct} from "@app/product/responseProduct";
-import {ProductUnit} from "@app/ordering/productuint";
+import {ProductUnit} from "@app/ordering/productunit";
 
 @Component({
   selector: 'app-ordering',

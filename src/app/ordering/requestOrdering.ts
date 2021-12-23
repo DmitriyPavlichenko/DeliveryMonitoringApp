@@ -1,4 +1,4 @@
-import {ProductUnit} from "./productuint";
+import {ProductUnit} from "./productunit";
 
 export class RequestOrdering {
   private productUnitList: ProductUnit[];
