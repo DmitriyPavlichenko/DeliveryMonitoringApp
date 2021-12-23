@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Employee} from "./employee";
+import {ResponseEmployee} from "./responseEmployee";
 import {environment} from "@environments/environment";
 import {User} from "@app/authorization/_models";
+import {RequestEmployee} from "@app/employee/requestEmployee";
 
 @Injectable({
   providedIn: 'root'
@@ -23,19 +24,19 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) { }
 
-  public getEmployee(phoneNumber: String): Observable<Employee> {
-    return this.http.get<Employee>(`${this.apiServerUrl}/api/v1/supply/employee/find?${phoneNumber}`, this.httpOptions);
+  public getEmployee(phoneNumber: String): Observable<ResponseEmployee> {
+    return this.http.get<ResponseEmployee>(`${this.apiServerUrl}/api/v1/supply/employee/find?phoneNumber=${phoneNumber}`, this.httpOptions);
   }
 
-  public getEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(`${this.apiServerUrl}/api/v1/supply/employee/findall`, this.httpOptions);
+  public getEmployees(): Observable<ResponseEmployee[]> {
+    return this.http.get<ResponseEmployee[]>(`${this.apiServerUrl}/api/v1/supply/employee/findall`, this.httpOptions);
   }
 
-  public addEmployee(employee: Employee) {
-    this.http.post(`${this.apiServerUrl}/api/v1/supply/employee`, employee, this.httpOptions);
+  public addEmployee(employee: RequestEmployee): Observable<any> {
+    return this.http.post(`${this.apiServerUrl}/api/v1/supply/employee`, employee, this.httpOptions);
   }
 
-  public deleteEmployee(phoneNumber: string) {
-    this.http.delete(`${this.apiServerUrl}/api/v1/supply/employee?${phoneNumber}`, this.httpOptions)
+  public deleteEmployee(phoneNumber: string): Observable<any> {
+    return this.http.delete(`${this.apiServerUrl}/api/v1/supply/employee?phoneNumber=${phoneNumber}`, this.httpOptions)
   }
 }

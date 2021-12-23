@@ -1,8 +1,8 @@
-enum EmployeeRole {
+export enum EmployeeRole {
   WAREHOUSE_WORKER, PRODUCT_SUPPLIER, MANAGER, ADMINISTRATOR
 }
 
-export interface Employee {
+export interface ResponseEmployee {
   uuid: string;
   firstName: string;
   lastName: string;

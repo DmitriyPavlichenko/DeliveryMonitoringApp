@@ -9,9 +9,9 @@
     <div class="nvbr d-flex p-2 justify-content-between bg-secondary">
       <h2 class="text-light">Employee list</h2>
       <div class="buttons d-flex align-center">
-        <button class="btn btn-success mr-1" onlick="disp(document.getElementByIdmodal('register'))"><i class="fa fa-plus-square"></i> Add Employee</button>
+        <button class="btn btn-success mr-1" onclick="disp(document.getElementByIdmodal('register'))"><i class="fa fa-plus-square"></i> Add Employee</button>
 
-        <button type="button" class="btn btn-primary mr-1" (click)="printReport()"><i class="fa fa-print"></i> PrintReport</button>
+<!--        <button type="button" class="btn btn-primary mr-1" (click)="printReport()"><i class="fa fa-print"></i> PrintReport</button>-->
 
         <span>
           <select name="filter"
@@ -120,3 +120,27 @@
 
 
 
+<!--  finding example-->
+<input type="text" #findingPhoneNumber="ngModel" ngModel=""
+       name="key" id="find" placeholder="Find employee" required>
+<button (click)="getEmployee(findingPhoneNumber.value)"><i></i> Find employee</button>
+<div>
+  <!--<div>{{responseDepartment.address}}</div>
+  <div>{{responseDepartment.uuid}}</div>-->
+</div>
+
+<!--  adding example-->
+<input type="text" #firstName="ngModel" ngModel=""
+       name="key" id="firstName" placeholder="firstname" required>
+<input type="text" #lastName="ngModel" ngModel=""
+       name="key" id="lastName" placeholder="lastname" required>
+<input type="text" #role="ngModel" ngModel=""
+       name="key" id="role" placeholder="role" required>
+<input type="text" #phoneNumber="ngModel" ngModel=""
+       name="key" id="phoneNumber" placeholder="phoneNumber" required>
+<button (click)="saveEmployee(firstName.value, lastName.value, role.value, phoneNumber.value)"><i></i> Save employee</button>
+
+<!--  deleting example-->
+<input type="text" #deletingPhoneNumber="ngModel" ngModel=""
+       name="key" id="delete" placeholder="Delete employee" required>
+<button (click)="deleteEmployee(deletingPhoneNumber.value)"><i></i> Delete employee</button>

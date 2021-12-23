@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Employee} from "./employee";
+import {EmployeeRole, ResponseEmployee} from "./responseEmployee";
 import {HttpErrorResponse} from "@angular/common/http";
 import {EmployeeService} from "./employee.service";
 import {User} from "@app/authorization/_models";
 import {BehaviorSubject} from "rxjs";
+import {RequestEmployee} from "@app/employee/requestEmployee";
 
 @Component({
   selector: 'app-employee',
@@ -13,10 +14,10 @@ import {BehaviorSubject} from "rxjs";
 export class EmployeeComponent implements OnInit{
   constructor(private employeeService: EmployeeService) { }
 
-  employee: Employee;
+  employee: ResponseEmployee;
   public getEmployee(phoneNumber: string): void {
     this.employeeService.getEmployee(phoneNumber).subscribe(
-      (response: Employee) => {
+      (response: ResponseEmployee) => {
         this.employee = response;
       },
       (error: HttpErrorResponse) => {
@@ -25,10 +26,10 @@ export class EmployeeComponent implements OnInit{
     );
   }
 
-  employees: Employee[];
+  employees: ResponseEmployee[];
   public getEmployees(): void {
     this.employeeService.getEmployees().subscribe(
-      (response: Employee[]) => {
+      (response: ResponseEmployee[]) => {
         this.employees = response;
       },
       (error: HttpErrorResponse) => {
@@ -37,16 +38,28 @@ export class EmployeeComponent implements OnInit{
     );
   }
 
-  public addEmployee(employee: Employee): void {
-    this.employeeService.addEmployee(employee);
+  public saveEmployee(firstName: string, lastName: string, role: EmployeeRole, phoneNumber: string): void {
+    let employee: RequestEmployee = new RequestEmployee(firstName, lastName, role, phoneNumber);
+    this.employeeService.addEmployee(employee).subscribe(
+      null,
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 
   public deleteEmployee(phoneNumber: string): void {
-    this.employeeService.deleteEmployee(phoneNumber);
+    this.employeeService.deleteEmployee(phoneNumber).subscribe(
+      null,
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 
 
   ngOnInit(): void {
-    this.employeeService.authorize((new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')))).value)
+    this.employeeService.authorize((new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')))).value);
+    this.getEmployees();
   }
 }
