@@ -3,6 +3,7 @@ import {environment} from "@environments/environment";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AppUser} from "./appUser";
 import {User} from "@app/authorization/_models";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -23,11 +24,11 @@ export class RegistrationService {
 
   constructor(private http: HttpClient) { }
 
-  public registerUser(user: AppUser) {
-    this.http.post(`${this.apiServerUrl}/api/v1/registration`, user, this.httpOptions);
+  public registerUser(user: AppUser): Observable<any> {
+    return this.http.post(`${this.apiServerUrl}/api/v1/registration`, user, this.httpOptions);
   }
 
-  public deleteUser(uuid: string) {
-    this.http.delete(`${this.apiServerUrl}/api/v1/registration${uuid}`, this.httpOptions)
+  public deleteUser(uuid: string): Observable<any> {
+    return this.http.delete(`${this.apiServerUrl}/api/v1/registration?uuid=${uuid}`, this.httpOptions)
   }
 }
