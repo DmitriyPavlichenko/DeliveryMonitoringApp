@@ -5,6 +5,7 @@ import {BehaviorSubject} from "rxjs";
 import {User} from "@app/authorization/_models";
 import {NgForm} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-registration',
@@ -12,7 +13,7 @@ import {HttpErrorResponse} from "@angular/common/http";
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
-  constructor(private registrationService: RegistrationService) {
+  constructor(private registrationService: RegistrationService, private router: Router) {
   }
 
   public registerUser(user: AppUser): void {
@@ -38,6 +39,6 @@ export class RegistrationComponent {
   }
 
   onSubmit(f: NgForm) {
-
+      this.router.navigate(['/home']);
   }
 }
