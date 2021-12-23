@@ -1,1 +1,38 @@
-<p>product works!</p>
+
+<div class="background-wrap">
+  <div class="background"></div>
+</div>
+
+<form id="accesspanel" action="">
+  <div class="p-container">
+<!--    <input type="submit" (click)="getProducts()">-->
+
+    <div class="nvbr d-flex p-2 justify-content-between bg-secondary">
+      <h2 class="text-light">Product list</h2>
+      <div class="buttons d-flex align-center">
+        <a href="#addProductModal" class="btn btn-success mr-1"><i class="fa fa-plus-square"></i> Add Product</a>
+        <button type="button" class="btn btn-primary p-1" (click)="printReport()"><i class="fa fa-print"></i> PrintReport</button>
+
+      </div>
+    </div>
+    <table id="products">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let product of products">
+      <tr>
+        <th scope="row">{{product.uuid}}</th>
+        <td>{{product.name}}</td>
+        <td>{{product.price}}</td>
+        <td><a (click)="deleteProduct(product.name)"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+</form>

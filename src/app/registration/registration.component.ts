@@ -1,8 +1,4 @@
-import {Component} from '@angular/core';
-import {User} from "@app/authorization/_models";
-import {RegistrationService} from "@app/registration/registration.service";
-import {AppUser} from "@app/registration/appUser";
-import {BehaviorSubject} from "rxjs";
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-registration',
@@ -10,19 +6,13 @@ import {BehaviorSubject} from "rxjs";
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
-  constructor(private registrationService: RegistrationService) { }
 
+  login: string | undefined;
+  password: string | undefined;
 
-  public registerUser(user: AppUser): void {
-    this.registrationService.registerUser(user);
-  }
+  constructor() { }
 
-  public deleteUser(uuid: string): void {
-    this.registrationService.deleteUser(uuid);
-  }
-
-
-  ngOnInit(): void {
-    this.registrationService.authorize((new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')))).value)
+  onSubmit(f: any) {
+    console.log('wowkr')
   }
 }

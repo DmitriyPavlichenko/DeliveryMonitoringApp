@@ -48,5 +48,6 @@ export class OrderingComponent implements OnInit {
 
   ngOnInit(): void {
     this.orderingService.authorize((new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')))).value)
+    this.getOrderings();
   }
 }

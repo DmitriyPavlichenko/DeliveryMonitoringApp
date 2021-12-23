@@ -47,6 +47,6 @@ export class DepartmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.departmentService.authorize((new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')))).value);
-  }
+    this.getDepartments()};
 
 }

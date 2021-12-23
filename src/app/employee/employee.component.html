@@ -4,9 +4,119 @@
 
 <form id="accesspanel" action="">
   <div class="p-container">
-    <input type="submit" (click)="getEmployees()">
-    <div *ngFor="let employee of employees">
-      <div>{{employee.firstName}}</div>
+<!--    <input type="submit" (click)="getEmployees()">-->
+
+    <div class="nvbr d-flex p-2 justify-content-between bg-secondary">
+      <h2 class="text-light">Employee list</h2>
+      <div class="buttons d-flex align-center">
+        <button class="btn btn-success mr-1" onlick="disp(document.getElementByIdmodal('register'))"><i class="fa fa-plus-square"></i> Add Employee</button>
+
+        <button type="button" class="btn btn-primary mr-1" (click)="printReport()"><i class="fa fa-print"></i> PrintReport</button>
+
+        <span>
+          <select name="filter"
+                  class="btn btn-info" style="height: 100%">
+                  <option label="ALL">ALL</option>
+                  <option label="Administrator">Administrator</option>
+                  <option label="Manager">Manager</option>
+                  <option label="Cashier">Cashier</option>
+                  <option label="Porter">Porter</option>
+                  <option label="Warehouse Worker">Warehouse Worker</option>
+          </select>
+        </span>
+      </div>
+    </div>
+
+    <div id="employeers">
+      <table class="table table-dark">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Role</th>
+          <th scope="col">PhoneNumber</th>
+          <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody  *ngFor="let employee of employees">
+        <tr>
+          <th scope="row">{{employee.uuid}}</th>
+          <td>{{employee.firstName}}</td>
+          <td>{{employee.lastName}}</td>
+          <td>{{employee.role}}</td>
+          <td>{{employee.phoneNumber}}</td>
+          <td><a (click)="deleteEmployee(employee.phoneNumber)"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+        </tr>
+
+        </tbody>
+      </table>
     </div>
   </div>
+
+<!--  <div id="#addEmployeeModal" class="modal">-->
+<!--    <div class="modal-dialog">-->
+<!--      <div class="modal-content">-->
+<!--        <form>-->
+<!--          <div class="modal-header">-->
+<!--            <h4 class="modal-title">Add Employee</h4>-->
+<!--            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+<!--          </div>-->
+<!--          <div class="modal-body">-->
+<!--            <div class="form-group">-->
+<!--              <label>First Name</label>-->
+<!--              <input type="text" name="firstName" class="form-control" reguired>-->
+<!--            </div>-->
+
+<!--            <div class="form-group">-->
+<!--              <label>Second Name</label>-->
+<!--              <input type="text" name="secondName" class="form-control" reguired>-->
+<!--            </div>-->
+
+<!--            <div class="form-group">-->
+<!--              <label>Phone number</label>-->
+<!--              <input type="text" name="phoneNumber" class="form-control" reguired>-->
+<!--            </div>-->
+
+<!--          </div>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 </form>
+
+
+<form id="register" style="display: none;">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<script>
+  function disp(form) {
+    if (form.style.display === "none") {
+      form.style.display = "block";
+    } else {
+      form.style.display = "none";
+
+  $.ajax({
+    'type':'POST',
+    'url':'skript.php'
+  });
+  }
+  }
+</script>
+
+
+

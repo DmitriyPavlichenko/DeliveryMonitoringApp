@@ -46,7 +46,22 @@ export class ProductComponent implements OnInit {
   }
 
 
+  public printReport(): void {
+      let dataType = 'application/vnd.ms-excel.sheet.macroEnabled.12';
+      let tableSelect = document.getElementById('products');
+      console.log(tableSelect)
+      let tableHtml = tableSelect.outerHTML.replace(/ /g, '%20');
+      console.log(tableHtml)
+      let downloadLink = document.createElement('a');
+      document.body.appendChild(downloadLink);
+      downloadLink.href = 'data:' + dataType + ', ' + tableHtml;
+      downloadLink.download = 'product-report.xls'
+      downloadLink.click();
+      document.body.removeChild(downloadLink)
+  }
+
   ngOnInit(): void {
     this.productService.authorize((new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')))).value)
+    this.getProducts()
   }
 }

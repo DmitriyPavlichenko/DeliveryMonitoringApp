@@ -1,1 +1,36 @@
-<p>ordering works!</p>
+<div class="background-wrap">
+  <div class="background"></div>
+</div>
+
+<form id="accesspanel" action="">
+  <div class="p-container">
+    <!--    <input type="submit" (click)="getEmployees()">-->
+
+    <div class="nvbr d-flex p-2 justify-content-between bg-secondary">
+      <h2 class="text-light">Ordering list</h2>
+      <div class="buttons d-flex align-center">
+        <button class="btn btn-success mr-1"><i class="fa fa-plus-square"></i> Add Ordering</button>
+
+        <!--        <button type="button" class="btn btn-primary mr-1" (click)="printReport()"><i class="fa fa-print"></i> PrintReport</button>-->
+
+      </div>
+    </div>
+
+    <table id="#orderings" class="table table-dark">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Product</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Employee</th>
+        <th scope="col">Department</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let ordering of orderings">
+      <td><a (click)="deleteOrdering(ordering.uuid)"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+      </tr>
+
+      </tbody>
+    </table>

@@ -1,1 +1,35 @@
-<p>department works!</p>
+<div class="background-wrap">
+  <div class="background"></div>
+</div>
+
+<form id="accesspanel" action="">
+  <div class="p-container">
+    <!--    <input type="submit" (click)="getEmployees()">-->
+
+    <div class="nvbr d-flex p-2 justify-content-between bg-secondary">
+      <h2 class="text-light">Department list</h2>
+      <div class="buttons d-flex align-center">
+        <button class="btn btn-success mr-1"><i class="fa fa-plus-square"></i> Add Department</button>
+
+<!--        <button type="button" class="btn btn-primary mr-1" (click)="printReport()"><i class="fa fa-print"></i> PrintReport</button>-->
+
+      </div>
+    </div>
+
+    <table id="#departments" class="table table-dark">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Address</th>
+
+      </tr>
+      </thead>
+      <tbody *ngFor="let department of departments">
+      <tr>
+        <th scope="row">{{department.uuid}}</th>
+        <td>{{department.address}}</td>
+        <td><a><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+      </tr>
+
+      </tbody>
+    </table>
