@@ -1,6 +1,6 @@
 import {ProductUnit} from "../product/productuint";
 
-export interface Ordering {
+export interface RequestOrdering {
   productUnitList: ProductUnit[];
   employeeUuid: string;
   departmentUuid: string;

@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import {environment} from "@environments/environment";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Ordering} from "./ordering";
+import {RequestOrdering} from "./requestOrdering";
 import {User} from "@app/authorization/_models";
+import {ResponseOrdering} from "@app/ordering/ResponseOrdering";
 
 @Injectable({
   providedIn: 'root'
@@ -23,15 +24,15 @@ export class OrderingService {
 
   constructor(private http: HttpClient) { }
 
-  public getOrdering(uuid: String): Observable<Ordering> {
-    return this.http.get<Ordering>(`${this.apiServerUrl}/api/v1/warehouse/ordering/find?${uuid}`, this.httpOptions);
+  public getOrdering(uuid: String): Observable<ResponseOrdering> {
+    return this.http.get<ResponseOrdering>(`${this.apiServerUrl}/api/v1/warehouse/ordering/find?${uuid}`, this.httpOptions);
   }
 
-  public getOrderings(): Observable<Ordering[]> {
-    return this.http.get<Ordering[]>(`${this.apiServerUrl}/api/v1/warehouse/ordering/findall`, this.httpOptions);
+  public getOrderings(): Observable<ResponseOrdering[]> {
+    return this.http.get<ResponseOrdering[]>(`${this.apiServerUrl}/api/v1/warehouse/ordering/findall`, this.httpOptions);
   }
 
-  public addOrdering(employee: Ordering) {
+  public addOrdering(employee: RequestOrdering) {
     this.http.post(`${this.apiServerUrl}/api/v1/warehouse/ordering`, employee, this.httpOptions);
   }
 

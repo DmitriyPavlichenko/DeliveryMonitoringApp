@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from "@app/authorization/_models";
 import {OrderingService} from "@app/ordering/ordering.service";
-import {Ordering} from "@app/ordering/ordering";
+import {RequestOrdering} from "@app/ordering/requestOrdering";
 import {HttpErrorResponse} from "@angular/common/http";
 import {BehaviorSubject} from "rxjs";
+import {ResponseOrdering} from "@app/ordering/ResponseOrdering";
 
 @Component({
   selector: 'app-ordering',
@@ -13,10 +14,10 @@ import {BehaviorSubject} from "rxjs";
 export class OrderingComponent implements OnInit {
   constructor(private orderingService: OrderingService) { }
 
-  ordering: Ordering;
+  ordering: ResponseOrdering;
   public getOrdering(name: string): void {
     this.orderingService.getOrdering(name).subscribe(
-      (response: Ordering) => {
+      (response: ResponseOrdering) => {
         this.ordering = response;
       },
       (error: HttpErrorResponse) => {
@@ -25,10 +26,10 @@ export class OrderingComponent implements OnInit {
     );
   }
 
-  orderings: Ordering[];
+  orderings: ResponseOrdering[];
   public getOrderings(): void {
     this.orderingService.getOrderings().subscribe(
-      (response: Ordering[]) => {
+      (response: ResponseOrdering[]) => {
         this.orderings = response;
       },
       (error: HttpErrorResponse) => {
@@ -37,7 +38,7 @@ export class OrderingComponent implements OnInit {
     );
   }
 
-  public addOrdering(ordering: Ordering): void {
+  public addOrdering(ordering: RequestOrdering): void {
     this.orderingService.addOrdering(ordering);
   }
 
