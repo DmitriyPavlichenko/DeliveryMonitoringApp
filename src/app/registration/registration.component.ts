@@ -3,7 +3,7 @@ import {RegistrationService} from "@app/registration/registration.service";
 import {AppUser} from "@app/registration/appUser";
 import {BehaviorSubject} from "rxjs";
 import {User} from "@app/authorization/_models";
-import {NgForm} from "@angular/forms";
+import {FormGroup, NgForm} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {EmployeeService} from "@app/employee/employee.service";
@@ -20,8 +20,10 @@ export class RegistrationComponent {
               private employeeService: EmployeeService) {
   }
 
-  public registerUser(user: AppUser): void {
-    this.registrationService.registerUser(user).subscribe(
+
+  public registerUser(employee: ResponseEmployee, password: string): void {
+    let registeredUser = new AppUser(employee.uuid, password);
+    this.registrationService.registerUser(registeredUser).subscribe(
       null,
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -52,6 +54,7 @@ export class RegistrationComponent {
 
   ngOnInit(): void {
     this.registrationService.authorize((new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')))).value);
+    this.getEmployees();
   }
 
   onSubmit(f: NgForm) {

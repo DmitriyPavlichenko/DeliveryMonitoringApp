@@ -8,6 +8,15 @@
     <div class="col-md-6 login-form-1">
       <h2>Register</h2>
       <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+        <div class="form-group">
+          <form>
+            <select formControlName="employee">
+              <option [value]="employee" *ngFor="let employee of employees">{{employee.uuid}}</option>
+            </select>
+          </form>
+        </div>
+
         <div class="form-group">
           <input type="text" name="user" ngModel required #username="ngModel"
                  class="form-control" placeholder="Employee phone number *" value=""/>
