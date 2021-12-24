@@ -5,6 +5,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {ProductService} from "@app/product/product.service";
 import {BehaviorSubject} from "rxjs";
 import {RequestProduct} from "@app/product/requestProduct";
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-product',
@@ -12,7 +13,8 @@ import {RequestProduct} from "@app/product/requestProduct";
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService,
+              private modalService: NgbModal) { }
 
   product: ResponseProduct;
   public getProduct(name: string): void {
@@ -70,6 +72,11 @@ export class ProductComponent implements OnInit {
       downloadLink.download = 'product-report.xls'
       downloadLink.click();
       document.body.removeChild(downloadLink)
+  }
+
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'})
   }
 
   ngOnInit(): void {
