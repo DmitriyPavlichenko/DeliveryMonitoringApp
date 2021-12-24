@@ -5,7 +5,8 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {ProductService} from "@app/product/product.service";
 import {BehaviorSubject} from "rxjs";
 import {RequestProduct} from "@app/product/requestProduct";
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-product',
@@ -40,8 +41,8 @@ export class ProductComponent implements OnInit {
     );
   }
 
-  public saveProduct(name: string, price: number): void {
-    let product: RequestProduct = new RequestProduct(name, price);
+  public saveProduct(form: NgForm): void {
+    let product: RequestProduct = new RequestProduct(form.value.name, form.value.price);
     this.productService.addProduct(product).subscribe(
       null,
       (error: HttpErrorResponse) => {

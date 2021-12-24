@@ -46,33 +46,20 @@
   <div>{{responseDepartment.uuid}}</div>-->
 </div>
 
-<!--  adding example-->
-<input type="text" #addingName="ngModel" ngModel=""
-       name="key" id="name" placeholder="name" required>
-<input type="text" #addingPrice="ngModel" ngModel=""
-       name="key" id="price" placeholder="price" required>
-<button (click)="saveProduct(addingName.value, addingPrice.value)"><i></i> Add product</button>
-
-<!--  deleting example-->
-<input type="text" #deletingName="ngModel" ngModel=""
-       name="key" id="delete" placeholder="Delete department" required>
-<button (click)="deleteProduct(deletingName.value)"><i></i> Delete product</button>
-
-
 <ng-template #content let-modal>
         <div class="modal-header">
           <h5 class="modal-title" id="addEmployeeModalLabel">Add Product</h5>
           <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">&times;</button>
         </div>
   <div class="modal-body">
-          <form #addForm="ngForm" (ngSubmit)="saveProduct(addForm.value.name, addForm.value.price)">
+          <form #addForm="ngForm" (ngSubmit)="saveProduct(addForm)">
             <div class="form-group">
               <label for="name">Product Name</label>
-              <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Product Name" required>
+              <input type="text" ngModel="" name="name" class="form-control" id="name" placeholder="Product Name" required>
             </div>
             <div class="form-group">
               <label for="price">Price</label>
-              <input type="price" ngModel name="email" class="form-control" id="price" placeholder="Price" required>
+              <input type="number" ngModel="" name="price" class="form-control" id="price" placeholder="Price" required>
             </div>
             <div class="modal-footer">
               <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
