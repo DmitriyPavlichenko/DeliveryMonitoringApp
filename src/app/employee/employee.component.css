@@ -57,3 +57,25 @@ i {
 a {
   color: white;
 }
+
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 10px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+label {
+  display: block;
+
+}
