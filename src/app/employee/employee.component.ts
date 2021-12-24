@@ -42,6 +42,7 @@ export class EmployeeComponent implements OnInit{
   }
 
   public saveEmployee(firstName: string, lastName: string, role: EmployeeRole, phoneNumber: string): void {
+    alert(firstName + lastName + role + phoneNumber)
     let employee: RequestEmployee = new RequestEmployee(firstName, lastName, role, phoneNumber);
     this.employeeService.addEmployee(employee).subscribe(
       null,
