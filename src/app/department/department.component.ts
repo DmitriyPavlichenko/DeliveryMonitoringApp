@@ -5,6 +5,7 @@ import {DepartmentService} from "@app/department/department.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {BehaviorSubject} from "rxjs";
 import {RequestDepartment} from "@app/department/RequestDepartment";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-department',
@@ -12,7 +13,8 @@ import {RequestDepartment} from "@app/department/RequestDepartment";
   styleUrls: ['./department.component.css']
 })
 export class DepartmentComponent implements OnInit {
-  constructor(private departmentService: DepartmentService) { }
+  constructor(private departmentService: DepartmentService,
+              private modalService: NgbModal) { }
 
   responseDepartment: ResponseDepartment;
   public getDepartment(address: string): void {
@@ -59,6 +61,11 @@ export class DepartmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.departmentService.authorize((new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')))).value);
-    this.getDepartments()};
+    this.getDepartments()
+  }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'})
+  }
 
 }

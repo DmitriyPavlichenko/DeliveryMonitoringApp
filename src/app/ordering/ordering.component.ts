@@ -12,6 +12,7 @@ import {ResponseEmployee} from "@app/employee/responseEmployee";
 import {ProductService} from "@app/product/product.service";
 import {ResponseProduct} from "@app/product/responseProduct";
 import {ProductUnit} from "@app/ordering/productunit";
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-ordering',
@@ -24,7 +25,8 @@ export class OrderingComponent implements OnInit {
   constructor(private orderingService: OrderingService,
               private departmentService: DepartmentService,
               private employeeService: EmployeeService,
-              private productService: ProductService) {
+              private productService: ProductService,
+              private modalService: NgbModal) {
   }
 
   public departmentsFromDB: ResponseDepartment[];
@@ -111,6 +113,24 @@ export class OrderingComponent implements OnInit {
     );
   }
 
+  closeResult = ''
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
 
   ngOnInit(): void {
     this.orderingService.authorize((new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')))).value)

@@ -2,20 +2,18 @@
   <div class="background"></div>
 </div>
 
-<form id="accesspanel" action="">
-  <div class="p-container">
-    <!--    <input type="submit" (click)="getEmployees()">-->
-
+<div class="p-container">
     <div class="nvbr d-flex p-2 justify-content-between bg-secondary">
       <h2 class="text-light">Ordering list</h2>
       <div class="buttons d-flex align-center">
-        <button class="btn btn-success mr-1"><i class="fa fa-plus-square"></i> Add Ordering</button>
+        <button class="btn btn-danger mr-1" (click)="open(content)"><i class="fa fa-plus-square"></i> Add ordering</button>
         <button type="button" class="btn btn-primary mr-1"><i class="fa fa-print"></i> PrintReport</button>
         <!--        <button type="button" class="btn btn-primary mr-1" (click)="printReport()"><i class="fa fa-print"></i> PrintReport</button>-->
 
       </div>
     </div>
   </div>
+
     <table id="#orderings" class="table table-dark">
       <thead>
       <tr>
@@ -45,4 +43,40 @@
       </tbody>
     </table>
 
-</form>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="addEmployeeModalLabel">Add Ordering</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <form #addForm="ngForm">
+      <div class="form-group">
+        <label for="name">Product Name</label>
+        <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Product Name" required>
+      </div>
+      <div class="form-group">
+        <label for="price">Product Price</label>
+        <input type="text" ngModel name="price" class="form-control" id="price" placeholder="Price" required>
+      </div>
+      <div class="form-group">
+        <label for="price">Employee</label>
+        <input type="text" ngModel name="employee" class="form-control" id="employee" placeholder="Employee" required>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Department</label>
+        <input type="text" ngModel name="department" class="form-control" id="department" placeholder="Department" required>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Date</label>
+        <input type="date" ngModel name="date" class="form-control" id="date" placeholder="Price" required>
+      </div>
+      <div class="modal-footer">
+        <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
