@@ -4,7 +4,8 @@ import {User} from '@app/authorization/_models';
 import {AuthenticationService} from '@app/authorization/_services';
 
 
-@Component({selector: 'app', templateUrl: 'app.component.html'})
+@Component({selector: 'app', templateUrl: 'app.component.html',
+styleUrls: ['app.component.css']})
 export class AppComponent {
   user: User;
 

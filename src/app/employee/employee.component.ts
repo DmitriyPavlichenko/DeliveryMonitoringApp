@@ -6,6 +6,7 @@ import {User} from "@app/authorization/_models";
 import {BehaviorSubject} from "rxjs";
 import {RequestEmployee} from "@app/employee/requestEmployee";
 
+
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
@@ -63,4 +64,5 @@ export class EmployeeComponent implements OnInit{
     this.employeeService.authorize(this.user);
     this.getEmployees();
   }
+
 }

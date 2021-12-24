@@ -9,7 +9,7 @@
     <div class="nvbr d-flex p-2 justify-content-between bg-secondary">
       <h2 class="text-light">Employee list</h2>
       <div class="buttons d-flex align-center">
-        <button class="btn btn-success mr-1" onclick="disp(document.getElementByIdmodal('register'))"><i class="fa fa-plus-square"></i> Add Employee</button>
+        <button class="btn btn-success mr-1"><i class="fa fa-plus-square"></i> Add Employee</button>
 
 <!--        <button type="button" class="btn btn-primary mr-1" (click)="printReport()"><i class="fa fa-print"></i> PrintReport</button>-->
 
@@ -54,35 +54,6 @@
     </div>
   </div>
 
-<!--  <div id="#addEmployeeModal" class="modal">-->
-<!--    <div class="modal-dialog">-->
-<!--      <div class="modal-content">-->
-<!--        <form>-->
-<!--          <div class="modal-header">-->
-<!--            <h4 class="modal-title">Add Employee</h4>-->
-<!--            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
-<!--          </div>-->
-<!--          <div class="modal-body">-->
-<!--            <div class="form-group">-->
-<!--              <label>First Name</label>-->
-<!--              <input type="text" name="firstName" class="form-control" reguired>-->
-<!--            </div>-->
-
-<!--            <div class="form-group">-->
-<!--              <label>Second Name</label>-->
-<!--              <input type="text" name="secondName" class="form-control" reguired>-->
-<!--            </div>-->
-
-<!--            <div class="form-group">-->
-<!--              <label>Phone number</label>-->
-<!--              <input type="text" name="phoneNumber" class="form-control" reguired>-->
-<!--            </div>-->
-
-<!--          </div>-->
-<!--        </form>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
 </form>
 
 
@@ -103,26 +74,11 @@
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
-<script>
-  function disp(form) {
-    if (form.style.display === "none") {
-      form.style.display = "block";
-    } else {
-      form.style.display = "none";
-
-  $.ajax({
-    'type':'POST',
-    'url':'skript.php'
-  });
-  }
-  }
-</script>
-
 
 
 <!--  finding example-->
 <input type="text" #findingPhoneNumber="ngModel" ngModel=""
-       name="key" id="find" placeholder="Find employee" required>
+name="key" id="find" placeholder="Find employee" required>
 <button (click)="getEmployee(findingPhoneNumber.value)"><i></i> Find employee</button>
 <div>
   <!--<div>{{responseDepartment.address}}</div>
@@ -131,16 +87,50 @@
 
 <!--  adding example-->
 <input type="text" #firstName="ngModel" ngModel=""
-       name="key" id="firstName" placeholder="firstname" required>
+name="key" id="firstName" placeholder="firstname" required>
 <input type="text" #lastName="ngModel" ngModel=""
-       name="key" id="lastName" placeholder="lastname" required>
+name="key" id="lastName" placeholder="lastname" required>
 <input type="text" #role="ngModel" ngModel=""
-       name="key" id="role" placeholder="role" required>
+name="key" id="role" placeholder="role" required>
 <input type="text" #phoneNumber="ngModel" ngModel=""
-       name="key" id="phoneNumber" placeholder="phoneNumber" required>
+name="key" id="phoneNumber" placeholder="phoneNumber" required>
 <button (click)="saveEmployee(firstName.value, lastName.value, role.value, phoneNumber.value)"><i></i> Save employee</button>
 
 <!--  deleting example-->
 <input type="text" #deletingPhoneNumber="ngModel" ngModel=""
-       name="key" id="delete" placeholder="Delete employee" required>
+name="key" id="delete" placeholder="Delete employee" required>
 <button (click)="deleteEmployee(deletingPhoneNumber.value)"><i></i> Delete employee</button>
+
+
+
+
+
+<div id="#addEmployeeModal" class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form>
+        <div class="modal-header">
+          <h4 class="modal-title">Add Employee</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" name="firstName" class="form-control" reguired>
+          </div>
+
+          <div class="form-group">
+            <label>Second Name</label>
+            <input type="text" name="secondName" class="form-control" reguired>
+          </div>
+
+          <div class="form-group">
+            <label>Phone number</label>
+            <input type="text" name="phoneNumber" class="form-control" reguired>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

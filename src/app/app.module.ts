@@ -21,7 +21,7 @@ import {ProductComponent} from "@app/product/product.component";
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
   ],
   declarations: [
     AppComponent,
