@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {RegistrationService} from "@app/registration/registration.service";
 import {AppUser} from "@app/registration/appUser";
 import {BehaviorSubject} from "rxjs";
@@ -6,6 +6,8 @@ import {User} from "@app/authorization/_models";
 import {NgForm} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {EmployeeService} from "@app/employee/employee.service";
+import {ResponseEmployee} from "@app/employee/responseEmployee";
 
 @Component({
   selector: 'app-registration',
@@ -13,7 +15,9 @@ import {Router} from "@angular/router";
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
-  constructor(private registrationService: RegistrationService, private router: Router) {
+  constructor(private registrationService: RegistrationService,
+              private router: Router,
+              private employeeService: EmployeeService) {
   }
 
   public registerUser(user: AppUser): void {
@@ -34,11 +38,25 @@ export class RegistrationComponent {
     );
   }
 
+  public employees: ResponseEmployee[];
+  public getEmployees(): void {
+    this.employeeService.getEmployees().subscribe(
+      (response: ResponseEmployee[]) => {
+        this.employees = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
   ngOnInit(): void {
     this.registrationService.authorize((new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')))).value);
   }
 
   onSubmit(f: NgForm) {
-      this.router.navigate(['/home']);
+    // let user: AppUser = new AppUser(f.)
+    // this.registerUser()
+    this.router.navigate(['/home']);
   }
 }
