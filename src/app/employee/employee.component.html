@@ -9,9 +9,8 @@
     <div class="nvbr d-flex p-2 justify-content-between bg-secondary">
       <h2 class="text-light">Employee list</h2>
       <div class="buttons d-flex align-center">
-        <button class="btn btn-success mr-1"><i class="fa fa-plus-square"></i> Add Employee</button>
-
-<!--        <button type="button" class="btn btn-primary mr-1" (click)="printReport()"><i class="fa fa-print"></i> PrintReport</button>-->
+        <button class="btn btn-danger mr-1" (click)="open(content)">Add employee</button>
+        <button type="button" class="btn btn-primary mr-1" (click)="printReport()"><i class="fa fa-print"></i> PrintReport</button>
 
         <span>
           <select name="filter"
@@ -105,32 +104,49 @@ name="key" id="delete" placeholder="Delete employee" required>
 
 
 
-<div id="#addEmployeeModal" class="modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form>
-        <div class="modal-header">
-          <h4 class="modal-title">Add Employee</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label>First Name</label>
-            <input type="text" name="firstName" class="form-control" reguired>
-          </div>
 
-          <div class="form-group">
-            <label>Second Name</label>
-            <input type="text" name="secondName" class="form-control" reguired>
-          </div>
-
-          <div class="form-group">
-            <label>Phone number</label>
-            <input type="text" name="phoneNumber" class="form-control" reguired>
-          </div>
-
-        </div>
-      </form>
-    </div>
+<!-- Modal -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add new employee</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
-</div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+          <div class="input-group-append">
+            <label for="firstName1">First name</label>
+            <input type="text" #firstName="ngModel" ngModel=""
+                   name="key" id="firstName1" placeholder="firstname" required>
+          </div>
+
+        <div class="input-group-append">
+          <label for="firstName1">Last name</label>
+          <input type="text" #lastName="ngModel" ngModel=""
+                 name="key" id="lastName1" placeholder="lastname" required>
+        </div>
+
+        <div class="input-group-append">
+          <label for="firstName1">Role</label>
+          <input type="text" #role="ngModel" ngModel=""
+                 name="key" id="role1" placeholder="role" required>
+        </div>
+
+        <div class="input-group-append">
+          <label for="firstName1">Phone number</label>
+          <input type="text" #phoneNumber="ngModel" ngModel=""
+                 name="key" id="phoneNumber1" placeholder="phoneNumber" required>
+        </div>
+        </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+<!--    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>-->
+    <button class="btn btn-outline-dark" (click)="saveEmployee(firstName.value, lastName.value, role.value, phoneNumber.value)"><i></i> Save employee</button>
+  </div>
+</ng-template>
+
+
+

@@ -5,7 +5,7 @@ import {EmployeeService} from "./employee.service";
 import {User} from "@app/authorization/_models";
 import {BehaviorSubject} from "rxjs";
 import {RequestEmployee} from "@app/employee/requestEmployee";
-
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-employee',
@@ -14,7 +14,8 @@ import {RequestEmployee} from "@app/employee/requestEmployee";
 })
 export class EmployeeComponent implements OnInit{
   user: User = (new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')))).value;
-  constructor(private employeeService: EmployeeService) { }
+  constructor(private employeeService: EmployeeService,
+              private modalService: NgbModal) { }
 
   employee: ResponseEmployee;
   public getEmployee(phoneNumber: string): void {
@@ -48,6 +49,7 @@ export class EmployeeComponent implements OnInit{
         alert(error.message);
       }
     );
+    window.location.reload();
   }
 
   public deleteEmployee(phoneNumber: string): void {
@@ -57,6 +59,8 @@ export class EmployeeComponent implements OnInit{
         alert(error.message);
       }
     );
+    window.location.reload();
+    this.getEmployees()
   }
 
 
@@ -65,4 +69,34 @@ export class EmployeeComponent implements OnInit{
     this.getEmployees();
   }
 
+  public printReport(): void {
+    let dataType = 'application/vnd.ms-excel.sheet.macroEnabled.12';
+    let tableSelect = document.getElementById('employeers');
+    let tableHtml = tableSelect.outerHTML.replace(/ /g, '%20');
+    let downloadLink = document.createElement('a');
+    document.body.appendChild(downloadLink);
+    downloadLink.href = 'data:' + dataType + ', ' + tableHtml;
+    downloadLink.download = 'employee-report.xls'
+    downloadLink.click();
+    document.body.removeChild(downloadLink)
+  }
+
+  closeResult = ''
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
 }
