@@ -83,25 +83,6 @@ name="key" id="find" placeholder="Find employee" required>
   <div>{{responseDepartment.uuid}}</div>-->
 </div>
 
-<!--  adding example-->
-<input type="text" #firstName="ngModel" ngModel=""
-name="key" id="firstName" placeholder="firstname" required>
-<input type="text" #lastName="ngModel" ngModel=""
-name="key" id="lastName" placeholder="lastname" required>
-<input type="text" #role="ngModel" ngModel=""
-name="key" id="role" placeholder="role" required>
-<input type="text" #phoneNumber="ngModel" ngModel=""
-name="key" id="phoneNumber" placeholder="phoneNumber" required>
-<button (click)="saveEmployee(firstName.value, lastName.value, role.value, phoneNumber.value)"><i></i> Save employee</button>
-
-<!--  deleting example-->
-<input type="text" #deletingPhoneNumber="ngModel" ngModel=""
-name="key" id="delete" placeholder="Delete employee" required>
-<button (click)="deleteEmployee(deletingPhoneNumber.value)"><i></i> Delete employee</button>
-
-
-
-
 
 
 <!-- Modal -->
@@ -115,29 +96,29 @@ name="key" id="delete" placeholder="Delete employee" required>
   <div class="modal-body">
     <form>
       <div class="form-group">
-        <label for="firstName1">First name</label>
+        <label for="firstName">First name</label>
           <div class="input-group-append">
             <input type="text" #firstName="ngModel" ngModel=""
-                   name="key" id="firstName1" placeholder="firstname" required>
+                   name="firstName" id="firstName" placeholder="firstname" required>
           </div>
 
-        <label for="firstName1">Last name</label>
+        <label for="lastName">Last name</label>
         <div class="input-group-append">
           <input type="text" #lastName="ngModel" ngModel=""
-                 name="key" id="lastName1" placeholder="lastname" required>
+                 name="lastName" id="lastName" placeholder="lastname" required>
         </div>
 
-        <label for="firstName1">Role</label>
+        <label for="role">Role</label>
         <div class="input-group-append">
           <input type="text" #role="ngModel" ngModel=""
-                 name="key" id="role1" placeholder="role" required>
+                 name="role" id="role" placeholder="role" required>
 
         </div>
 
-        <label for="firstName1">Phone number</label>
+        <label for="phoneNumber">Phone number</label>
         <div class="input-group-append">
           <input type="text" #phoneNumber="ngModel" ngModel=""
-                 name="key" id="phoneNumber1" placeholder="phoneNumber" required>
+                 name="phoneNumber" id="phoneNumber" placeholder="phoneNumber" required>
         </div>
         </div>
     </form>
